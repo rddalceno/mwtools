@@ -34,8 +34,8 @@ fi
 # Load some libs
 #
 
-. $MWTOOLS_HOME/lib/sh/chkvars.sh
-. $MWTOOLS_HOME/lib/sh/usage.sh
+. $MWTOOLS_HOME/lib/sh/wlschkvars.sh
+. $MWTOOLS_HOME/lib/sh/wlsusage.sh
 
 #
 # Check if environment variables needed to work were set
@@ -109,4 +109,15 @@ case $OPS in
 	echo ". $MWTOOLS_HOME/lib/sh/wlsstart.sh $SRVNAME"
 	;;
 
+    dsstats)
+	echo "$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/wlst/dsstats.wlst weblogic d9a24661da t3://localhost:7001"
+	echo
+	;;
+
+    *)
+	echo "Error 2: Syntax error"
+	usage
+	echo
+	exit 2
+	;;
 esac

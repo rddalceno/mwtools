@@ -13,7 +13,7 @@ function usage() {
         echo "Usage: wlutils -d <domain-name> -o <operation>"
         echo
         echo "  Operation must be one of the following options:"
-        echo "     dsstate              Returns DataSources state"
+        echo "     dsstats              Returns DataSources state"
         echo "     srvstate             Returns AdminServer and Managed Servers states and health"
 	echo "     srvstop              Stops AdminServer or a Managed Server (requires server name)"
 	echo "     srvstart             Starts AdminServer or a Managed Server (requires server name)"
