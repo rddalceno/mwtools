@@ -109,9 +109,17 @@ case $OPS in
 	echo ". $MWTOOLS_HOME/lib/sh/wlsstart.sh $SRVNAME"
 	;;
 
+    srvstate)
+	echo ". $MWTOOLS_HOME/lib/sh/wlsstate.sh $SRVNAME"
+	;;
+
     dsstats)
 	echo "$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/wlst/dsstats.wlst weblogic d9a24661da t3://localhost:7001"
 	echo
+	;;
+
+    dstop)
+	$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/wlst/dstop.wlst weblogic d9a24661da t3://localhost:7001
 	;;
 
     *)

@@ -1,0 +1,35 @@
+import os
+import sys
+from datetime import datetime
+from time import sleep
+
+username=sys.argv[1]
+password=sys.argv[2]
+url=sys.argv[3]
+
+connect(username,password,url)
+
+#servers=get('Servers')
+servers=domainRuntimeService.getServerRuntimes()
+
+loopsentinel=True
+
+while loopsentinel==True:
+	for srv in servers:
+		srvjdbc=srv.getJDBCServiceRuntime()
+		datasources=srvjdbc.getJDBCDataSourceRuntimeMBeans()
+		print datetime.today()
+		print srv.getName()
+		print 'State\tCap\tCon\tWai\tName'
+
+		for ds in datasources:
+			dsname=ds.getName()
+			dsstate=ds.getState()
+			dscapacity=ds.getCurrCapacity()
+			dscurrconn=ds.getActiveConnectionsCurrentCount()
+			dswaiting=ds.getWaitingForConnectionCurrentCount()
+			print '%s\t%i\t%i\t%i\t%s' % (dsstate,dscapacity,dscurrconn,dswaiting,dsname)
+		print ''
+
+	sleep(2)
+	os.system('clear')
