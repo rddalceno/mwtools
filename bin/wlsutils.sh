@@ -110,7 +110,8 @@ case $OPS in
 	;;
 
     srvstate)
-	echo ". $MWTOOLS_HOME/lib/sh/wlsstate.sh $SRVNAME"
+	. $MWTOOLS_HOME/lib/sh/wlssrvstate.sh
+	wlssrvstate $DOMAIN $SRVNAME
 	;;
 
     dsstats)
