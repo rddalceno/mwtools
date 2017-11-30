@@ -96,11 +96,13 @@ done
 
 case $OPS in
     srvstart)
-	echo ". $MWTOOLS_HOME/lib/sh/wlsstart.sh $SRVNAME"
+	echo ". $MWTOOLS_HOME/lib/sh/wlsstart.sh $DOMAIN $SRVNAME"
+	$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/wlst/srvstart.wlst $DOMAIN $SRVNAME
 	;;
 
     srvstop)
 	echo ". $MWTOOLS_HOME/lib/sh/wlsstop.sh $SRVNAME"
+	$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/wlst/srvstop.wlst $DOMAIN $SRVNAME
 	;;
 
     srvrestart|srvreload)
@@ -110,8 +112,7 @@ case $OPS in
 	;;
 
     srvstate)
-	. $MWTOOLS_HOME/lib/sh/wlssrvstate.sh
-	wlssrvstate $DOMAIN $SRVNAME
+	echo ". $MWTOOLS_HOME/lib/sh/wlsstate.sh $DOMAIN $SRVNAME"
 	;;
 
     dsstats)
