@@ -1,0 +1,17 @@
+MWTOOLS - API
+
+* Nomes de variaveis em shell script DEVEM ser escritos em caixa alta
+* Nomes de arquivos em shell script DEVEM comecar por:
+ - wl_: caso seja um shell script para WebLogic
+ - ws_: caso seja um shell script para WebSphere
+ - tc_: caso seja um shell script para Tomcat
+ - jb_: caso seja um shell script para JBoss
+ - oc_: caso seja um shell script para iAS/OAS/OC4J
+ - mw_: caso seja um shell script generico para todo o MWTools
+
+* Nomes de variaveis em Python DEVEM ser escritos em caixa baixa
+ - Caso o nome tenha 2 ou mais palavras, elas devem ser separadas por _ (underscore)
+
+* Codigo duplicado deve, sempre que possivel, ser movido para uma funcao, metodo ou classe especifico
+* Funcao, em shell script, deve ser movida para um arquivo especifico, sempre que possivel
+* Classe, em Python, devem ser movidas para um arquivo especifico, sempre que possivel
