@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# name:        wlutils.sh
-# function:    Starts wlutils - WebLogic WLST Utilities
+# name:        wl_utils.sh
+# function:    Main interface for wl_utils - WebLogic Utilities
 # created:     Nov 23, 2017
 # created by:  Ricardo D. Dalceno <ricardo.dalceno@tivit.com>
 # updated:
@@ -11,6 +11,7 @@
 #
 # Error codes
 #
+# 0:    Success
 # 1:    Environment variable not set
 # 2:    Syntax error
 # 3:    Config file not found
@@ -34,8 +35,9 @@ fi
 # Load some libs
 #
 
-. $MWTOOLS_HOME/lib/sh/wlschkvars.sh
-. $MWTOOLS_HOME/lib/sh/wlsusage.sh
+. $MWTOOLS_HOME/lib/sh/wl_chkvars.sh
+. $MWTOOLS_HOME/lib/sh/wl_env.sh
+. $MWTOOLS_HOME/lib/sh/wl_usage.sh
 
 #
 # Check if environment variables needed to work were set
@@ -96,32 +98,30 @@ done
 
 case $OPS in
     srvstart)
-	echo ". $MWTOOLS_HOME/lib/sh/wl_srvstart.sh $DOMAIN $SRVNAME"
 	$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/wlst/srvstart.wlst $DOMAIN $SRVNAME
 	;;
 
     srvstop)
-	echo ". $MWTOOLS_HOME/lib/sh/wl_srvstop.sh $DOMAIN $SRVNAME"
 	$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/wlst/srvstop.wlst $DOMAIN $SRVNAME
 	;;
 
     srvrestart|srvreload)
-	echo ". $MWTOOLS_HOME/lib/sh/wl_srvstop.sh $DOMAIN $SRVNAME"
+	$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/sh/wl_srvstop.sh $DOMAIN $SRVNAME
 	sleep 5
-	echo ". $MWTOOLS_HOME/lib/sh/wl_srvstart.sh $DOMAIN $SRVNAME"
+	$MWHOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/sh/wl_srvstart.sh $DOMAIN $SRVNAME
 	;;
 
     srvstate)
-	echo ". $MWTOOLS_HOME/lib/sh/wlsstate.sh $DOMAIN $SRVNAME"
+	$MWTOOLS_HOME/lib/sh/wl_srvstate.sh $DOMAIN $SRVNAME
 	;;
 
     dsstats)
-	echo "$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/wlst/dsstats.wlst weblogic d9a24661da t3://localhost:7001"
+	echo "Not Implemented Yet"
 	echo
 	;;
 
     dstop)
-	$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/wlst/dstop.wlst weblogic d9a24661da t3://localhost:7001
+	$MW_HOME/oracle_common/common/bin/wlst.sh $MWTOOLS_HOME/lib/wlst/dstop.wlst $DOMAIN
 	;;
 
     *)

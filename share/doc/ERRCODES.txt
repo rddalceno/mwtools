@@ -1,5 +1,6 @@
 LIST OF WLUTILS ERROR CODES
 
+0:    Success
 1:    Environment variable not set
 2:    Syntax error
 3:    Config file not found
