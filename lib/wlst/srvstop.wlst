@@ -6,14 +6,14 @@ domain_name=sys.argv[1]
 srv_name=sys.argv[2]
 
 domains_cfg=ConfigParser.ConfigParser()
-domains_cfg.read(os.environ['MWTOOLS_HOME']+'/conf/wlsutils-domains.conf')
+domains_cfg.read(os.environ['MWTOOLS_HOME']+'/conf/wl_utils.conf'')
 domain_path=domains_cfg.get(domain_name,'path')
 domain_user=domains_cfg.get(domain_name,'username')
-domain_url=domains_cfg.get(domain_name,'adminurl')
+domain_url=domains_cfg.get(domain_name,'admin_url')
 domain_enc_svc=weblogic.security.internal.SerializedSystemIni.getEncryptionService(domain_path)
 domain_decoder=weblogic.security.internal.encryption.ClearOrEncryptedService(domain_enc_svc)
 domain_pass=domain_decoder.decrypt(domains_cfg.get(domain_name,'password'))
 
 connect(domain_user,domain_pass,domain_url)
 
-shutdown(name=srv_name,entityType='Server',ignoreSessions='true',timeOut=30000,force='false',block='true')
+shutdown(name=srv_name,entityType='Server',ignoreSessions='true',timeOut=30000,force='false',block='false')

@@ -3,13 +3,22 @@ import sys
 from datetime import datetime
 from time import sleep
 
-username=sys.argv[1]
-password=sys.argv[2]
-url=sys.argv[3]
+import ConfigParser
 
-connect(username,password,url)
+domain_name=sys.argv[1]
+srv_name=sys.argv[2]
 
-#servers=get('Servers')
+domains_cfg=ConfigParser.ConfigParser()
+domains_cfg.read(os.environ['MWTOOLS_HOME']+'/conf/wl_utils.conf')
+domain_path=domains_cfg.get(domain_name,'path')
+domain_user=domains_cfg.get(domain_name,'username')
+domain_url=domains_cfg.get(domain_name,'admin_url')
+domain_enc_svc=weblogic.security.internal.SerializedSystemIni.getEncryptionService(domain_path)
+domain_decoder=weblogic.security.internal.encryption.ClearOrEncryptedService(domain_enc_svc)
+domain_pass=domain_decoder.decrypt(domains_cfg.get(domain_name,'password'))
+
+connect(domain_user,domain_pass,domain_url)
+
 servers=domainRuntimeService.getServerRuntimes()
 
 loopsentinel=True
